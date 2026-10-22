@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Spider Link Solution mark">
+  <title>Spider Link Solution</title>
+  <desc>Placeholder recreation of the Spider Link Solution angular spider emblem with Wi-Fi arcs. Replace with the supplied logo file.</desc>
+  <g fill="none" stroke="#E60000" stroke-width="16" stroke-linecap="round">
+    <path d="M212 178 A48 48 0 0 1 300 178"/>
+    <path d="M186 178 A80 80 0 0 1 326 178"/>
+    <path d="M160 178 A112 112 0 0 1 352 178"/>
+  </g>
+  <g fill="none" stroke="#E60000" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M222 255 L155 215 L115 160 L88 175"/>
+    <path d="M218 285 L140 285 L95 255 L72 278"/>
+    <path d="M222 310 L150 330 L100 368 L75 350"/>
+    <path d="M236 330 L190 380 L165 430 L142 412"/>
+    <path d="M290 255 L357 215 L397 160 L424 175"/>
+    <path d="M294 285 L372 285 L417 255 L440 278"/>
+    <path d="M290 310 L362 330 L412 368 L437 350"/>
+    <path d="M276 330 L322 380 L347 430 L370 412"/>
+  </g>
+  <g fill="#E60000">
+    <path d="M256 192 L276 222 L236 222 Z"/>
+    <path d="M256 228 L294 250 L289 287 L256 302 L223 287 L218 250 Z"/>
+    <path d="M256 300 L311 336 L331 396 L296 446 L256 470 L216 446 L181 396 L201 336 Z"/>
+  </g>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="3">
+    <path d="M256 300 L301 336 L256 331 L211 336 Z"/>
+    <path d="M256 331 L301 390 L256 376 L211 390 Z"/>
+    <path d="M256 376 L296 446 L256 470 L216 446 Z"/>
+    <path d="M256 228 L256 302"/>
+  </g>
+  <g fill="#E60000">
+    <path d="M244 221 L237 240 L247 226 Z"/>
+    <path d="M268 221 L275 240 L265 226 Z"/>
+  </g>
+</svg>

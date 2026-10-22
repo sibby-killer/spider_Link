@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fff1f1;
+  --color-brand-100: #ffe0e0;
+  --color-brand-200: #ffc5c5;
+  --color-brand-300: #ff9a9a;
+  --color-brand-400: #ff5757;
+  --color-brand-500: #ff1f1f;
+  --color-brand-600: #e60000;
+  --color-brand-700: #b30000;
+  --color-brand-800: #8f0000;
+  --color-brand-900: #750000;
+
+  --color-ink: #0b0b0b;
+  --color-ink-soft: #3d3d3d;
+  --color-paper: #ffffff;
+  --color-mist: #f7f7f8;
+
+  --font-display: "Arial Black", "Helvetica Neue", Impact, system-ui, sans-serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius-card: 14px;
+
+  --shadow-glow: 0 20px 45px -22px rgba(230, 0, 0, 0.45);
+  --shadow-lift: 0 24px 60px -30px rgba(11, 11, 11, 0.35);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.8s ease-out infinite;
+  --animate-marquee: marquee 26s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.65;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-brand-600);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    background: var(--color-brand-600);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.85rem 1.6rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-brand-700);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    border: 2px solid var(--color-ink);
+    background: #fff;
+    color: var(--color-ink);
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
+
+  .container-x {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1200px;
+    padding-inline: 1.25rem;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Technician characters ------------------------------------------- */
+.tech-character {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.tech-arm {
+  transform-origin: 24px 98px;
+  transition: transform 0.25s ease;
+}
+
+.group:hover .tech-arm,
+.group:focus-within .tech-arm {
+  animation: tech-wave 1.1s ease-in-out infinite;
+}
+
+.group:hover .tech-character,
+.group:focus-within .tech-character {
+  animation: tech-bounce 2.6s ease-in-out infinite;
+}
+
+@keyframes tech-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+  75% {
+    transform: rotate(-18deg);
+  }
+}
+
+@keyframes tech-bounce {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+
