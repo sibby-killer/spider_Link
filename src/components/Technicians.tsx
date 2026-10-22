@@ -1,8 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { Phone, Wrench } from "lucide-react";
 import Reveal from "./Reveal";
+
+const TechnicianScene3D = dynamic(() => import("./TechnicianScene3D"), {
+  ssr: false,
+  loading: () => <span className="block h-full w-full animate-pulse rounded-full bg-white/5" />,
+});
 
 export type Technician = {
   id: string;
@@ -147,6 +153,12 @@ export default function Technicians({
   ctaLabel: string;
 }) {
   const [active, setActive] = useState<string | null>(null);
+  const [show3d, setShow3d] = useState(false);
+
+  useEffect(() => {
+    setShow3d(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
   if (!technicians.length) return null;
 
   return (
@@ -159,53 +171,61 @@ export default function Technicians({
           <p className="mt-1 text-sm text-white/50">{areaNote}</p>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-10 md:grid-cols-3">
           {technicians.map((technician, index) => (
             <Reveal key={technician.id} delay={index * 80}>
               <article
                 onMouseEnter={() => setActive(technician.id)}
                 onMouseLeave={() => setActive(null)}
-                className={`tech-card group relative h-full overflow-hidden rounded-[var(--radius-card)] border p-6 text-center transition-all duration-300 ${
-                  active === technician.id
-                    ? "-translate-y-2 border-transparent shadow-[0_30px_60px_-30px_rgba(230,0,0,0.8)]"
-                    : "border-white/10 bg-white/5"
-                }`}
-                style={active === technician.id ? { background: `linear-gradient(180deg, ${technician.accent}22, #ffffff08)` } : undefined}
+                className="group relative flex h-full flex-col items-center text-center"
               >
-                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-40 blur-2xl transition-opacity duration-300"
-                  style={{ background: technician.accent, opacity: active === technician.id ? 0.5 : 0.15 }}
+                <div
+                  className="pointer-events-none absolute top-6 h-52 w-52 rounded-full blur-3xl transition-opacity duration-500"
+                  style={{ background: technician.accent, opacity: active === technician.id ? 0.3 : 0.12 }}
                 />
 
-                <div className="relative mx-auto h-40 w-40">
-                  <Character accent={technician.accent} initials={technician.initials} />
+                <div className="relative h-64 w-full max-w-[17rem]">
+                  {show3d ? (
+                    <TechnicianScene3D
+                      accent={technician.accent}
+                      wave={active === technician.id}
+                      variant={index}
+                    />
+                  ) : (
+                    <Character accent={technician.accent} initials={technician.initials} />
+                  )}
                 </div>
 
-                <h3 className="relative mt-4 text-lg font-bold text-white">{technician.name}</h3>
-                <p className="relative text-sm" style={{ color: technician.accent }}>
+                <div
+                  className="mt-1 h-0.5 w-10 rounded-full transition-all duration-300 group-hover:w-20"
+                  style={{ background: technician.accent }}
+                />
+                <h3 className="mt-4 text-lg font-bold text-white">{technician.name}</h3>
+                <p className="text-sm" style={{ color: technician.accent }}>
                   {technician.role}
                 </p>
-                <p className="relative mt-1 text-xs text-white/50">{technician.area}</p>
+                <p className="mt-1 text-xs text-white/50">{technician.area}</p>
 
-                <div className="relative mt-5 flex flex-col gap-2">
+                <div className="mt-4 flex flex-col items-center gap-1.5">
                   <a
                     href={`tel:${technician.phone}`}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-brand-300"
                   >
-                    <Phone size={15} />
+                    <Phone size={14} />
                     {technician.phone}
                   </a>
                   <a
                     href={`https://wa.me/${technician.phone.replace(/\D/g, "")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+                    className="inline-flex items-center gap-2 text-xs text-white/55 transition-colors hover:text-white"
                   >
-                    <Wrench size={15} />
+                    <Wrench size={13} />
                     Ask for {technician.name.split(" ")[0]} on WhatsApp
                   </a>
                 </div>
 
-                <p className="relative mt-4 text-[0.65rem] uppercase tracking-[0.18em] text-white/35">
+                <p className="mt-4 text-[0.65rem] uppercase tracking-[0.18em] text-white/35">
                   {ctaLabel} — mention their name
                 </p>
               </article>
